@@ -56,26 +56,44 @@ El alumno que hace de administrador del servidor web, debe entregar una document
 
 2. Utiliza la clave anterior para generar un CSR, considerando que deseas acceder al servidor tanto con el FQDN (tunombre.iesgn.org) como con el nombre de host (implica el uso de las extensiones Alt Name).
 
-Se instala el paquete ssl:
+Se crea la clave:
 ~~~
-vagrant@servidor:/var/www/html/paloma$ sudo apt install ssl
-~~~
-
-Configurar el fichero /etc/ssl/openssl.cnf para añadir la extención Alt Name y se decomenta la siguiente línea:
-~~~
-issuerAltName=issuer:copy
+vagrant@servidor:~$ sudo openssl genrsa -out paloma.iesgn.org.key 4096
 ~~~
 
-
-
-
-
-Se crea la clave y el .csr con el comando:
+Se crea el fichero paloma.iesgn.org.conf y configura:
 ~~~
-vagrant@servidor:/var/www/html/paloma$ sudo openssl req -new -newkey rsa:4096 -nodes -keyout paloma.iesgn.org.key -out paloma.iesgn.org.csr
+[ req ]
+default_bits       = 4096
+default_keyfile    = paloma.iesgn.org.key
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+
+[ req_distinguished_name ]
+countryName                 = Country Name (2 letter code)
+countryName_default         = sp
+stateOrProvinceName         = State or Province Name (full name)
+stateOrProvinceName_default = Seville
+localityName                = Locality Name (eg, city)
+localityName_default        = Dos Hermanas
+organizationName            = Organization Name (eg, company)
+organizationName_default    = paloma 
+commonName                  = Common Name (e.g. server FQDN or YOUR name)
+commonName_max              = 64
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1   = servidor
+~~~
+
+Y se crea el certificado llamando al fichero de configuración que se ha creado:
+~~~
+vagrant@servidor:~$ sudo openssl req -new -nodes -sha256 -config paloma.iesgn.org.conf -out paloma.iesgn.org.csr
 Generating a RSA private key
-.++++
-......................................................................................................................................................................................................................................................++++
+.......................................................................................................................................................................................................................................................................++++
+.............++++
 writing new private key to 'paloma.iesgn.org.key'
 -----
 You are about to be asked to enter information that will be incorporated
@@ -85,27 +103,28 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
-Country Name (2 letter code) [AU]:Sp
-State or Province Name (full name) [Some-State]:Seville
-Locality Name (eg, city) []:Dos Hermanas
-Organization Name (eg, company) [Internet Widgits Pty Ltd]:paloma.iesgn
-Organizational Unit Name (eg, section) []:paloma
-Common Name (e.g. server FQDN or YOUR name) []:paloma.iesgn.org
-Email Address []:palomagarciacampon08@gmail.com
-
-Please enter the following 'extra' attributes
-to be sent with your certificate request
-A challenge password []:
-An optional company name []:
+Country Name (2 letter code) [sp]:
+State or Province Name (full name) [Seville]:
+Locality Name (eg, city) [Dos Hermanas]:
+Organization Name (eg, company) [paloma]:
+Common Name (e.g. server FQDN or YOUR name) []:paloma.iesgn.org 
 ~~~
+
+![Imagen1](Img-tarea2-serv.png)
 
 
 3. Envía la solicitud de firma a la entidad certificadora (su compañero).
+Como este ejercicio se está realizando a través de máquinas virtuales en vagrant, vamos a enviar el fichero con el comando scp a la máquina anfitriona y de ahí a la máquina que actúa de entidad certificadora. 
 
 
 4. Recibe como respuesta un certificado X.509 para el servidor firmado y el certificado de la autoridad certificadora.
 
+
 5. Configura tu servidor web con https en el puerto 443, haciendo que las peticiones http se redireccionen a https (forzar https).
+SSLCertificateFile      /etc/ssl/certs/paloma.iesgn.org-f$
+                SSLCertificateKeyFile /etc/ssl/private/paloma.iesgn.org.k$
+
+
 
 **Tarea 2: Certificados digital con CAcert**
 
