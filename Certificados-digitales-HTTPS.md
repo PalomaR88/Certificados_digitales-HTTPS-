@@ -153,13 +153,13 @@ vagrant@servidor:~$ sudo systemctl restart apache2
 ~~~
 
 Accedemos a la misma dirección que antes pero con https://
-![Imagen] Img_Tarea3-serv.png
+![Imagen] (Img_Tarea3-serv.png)
 
 Se importa el certificado de la entidad autentificadora:
-![imagen_crsEA] Img_Tarea3A.png
+![imagen_crsEA] (Img_Tarea3A.png)
 
 Con el certificado importado aparece ya la señal de conexión segura:
-![imagen_conexionsegura] Img_Tarea3B.png
+![imagen_conexionsegura] (Img_Tarea3B.png)
 
 
 Se accede al fichero de configuración paloma.iesgn.conf apra realizar la redirección a https añadiendo las siguientes líneas:
