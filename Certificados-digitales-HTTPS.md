@@ -28,16 +28,58 @@ En **Preferencias** > **Privacidad y seguridad** > **Seguridad** > **Certificado
 **Tarea 2: Validación del certificado**
 1. Instala en tu ordenador el software autofirma y desde la página de VALIDe valida tu certificado. Muestra capturas de pantalla donde se comprueba la validación.
 
+Descarga el software desde [Firma electrónica gob](https://firmaelectronica.gob.es/Home/Descargas.html) o con el siguiente comando:
+~~~
+paloma@coatlicue:~$ wget https://estaticos.redsara.es/comunes/autofirma/currentversion/AutoFirma_Linux.zip
+~~~
+
+Pero antes, ya que es necesario un paquete de java, hay que instalar los siquientes paquetes:
+~~~
+paloma@coatlicue:~$ sudo apt-get install default-jre
+paloma@coatlicue:~$ sudo apt-get install default-jdk
+~~~
+
+Una vez instalados los paquetes y descargada la herramienta necesaria:
+~~~
+paloma@coatlicue:~$ unzip AutoFirma_Linux.zip 
+paloma@coatlicue:~$ sudo apt install libnss3-tools
+paloma@coatlicue:~$ sudo dpkg -i AutoFirma_1_6_5.deb
+~~~
+
+En [VALIDe](https://valide.redsara.es) se valida el certificado seleccionando la opción AutoFirma:
+
+![Imagen valide](Img_tarea2.png)
+![Imagen valide](Img_tarea2A.png)
+
 
 **Tarea 3: Firma electrónica**
 1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
 
+En la página del ejercicio anterior se selecciona la pestaña **Realizar firma** y el botón **Firmar**. De nuevo se selecciona AutoFirma y se elige el fichero que se quiere firmar y el certificado que anteriormente se ha validado. 
+![FicheroAutofirma](Img_tarea2B.png)
+![FicheroAutofirma](Img_tarea2C.png)
+![FicheroAutofirma](Img_tarea2D.png)
+
+
 2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
+
+Para visualizar la firma del compañero hay que seleccionar Visualizar Firma.
+![FicheroAutofirma](Img_tarea2E.png)
+![FicheroAutofirma](Img_tarea2F.png)
+
+Para validar la firma del compañero hay que seleccionar Validar Firma.
+![FicheroAutofirma](Img_tarea2G.png)
+
 
 3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
 
+Con la aplicación AutoFirma se selecciona el documento del compañero y se firma.
+![FicheroAutofirma](Img_tarea2H.png)
+
+
 **Tarea 4: Autentificación**
 1. Utilizando tu certificado accede a alguna página de la administración pública )cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
+![FicheroAutofirma](Img_tarea2I.png)
 
 
 ## HTTPS / SSL
