@@ -121,9 +121,54 @@ Como este ejercicio se está realizando a través de máquinas virtuales en vagr
 
 
 5. Configura tu servidor web con https en el puerto 443, haciendo que las peticiones http se redireccionen a https (forzar https).
-SSLCertificateFile      /etc/ssl/certs/paloma.iesgn.org-f$
-                SSLCertificateKeyFile /etc/ssl/private/paloma.iesgn.org.k$
+Se crea un nuevo fichero de configuración que lo hemos llamado paloma.iesgn.ssl.conf, que es una copia del fichero de configuración de nuestro sitio web, indicando la llave y los certificados:
+~~~
+<IfModule mod_ssl.c>
+	<VirtualHost _default_:443>
+		ServerAdmin webmaster@localhost
+		ServerName paloma.iesgn.org
+		DocumentRoot /var/www/html/paloma
 
+		SSLEngine on
+
+		SSLCertificateFile /etc/ssl/certs/paloma.iesgn.org-firmado.crt
+		SSLCertificateKeyFile /etc/ssl/private/paloma.iesgn.org.key
+		SSLCertificateChainFile /etc/ssl/certs/paloma.iesgn.org.csr
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	</VirtualHost>
+</IfModule>
+~~~
+
+
+Se inicia apache con el nuevo .conf:
+~~~
+vagrant@servidor:~$ sudo a2ensite paloma.iesgn.ssl
+Enabling site paloma.iesgn.ssl.
+To activate the new configuration, you need to run:
+  systemctl reload apache2
+vagrant@servidor:~$ sudo systemctl restart apache2
+~~~
+
+Accedemos a la misma dirección que antes pero con https://
+![Imagen] Img_Tarea3-serv.png
+
+Se importa el certificado de la entidad autentificadora:
+![imagen_crsEA] Img_Tarea3A.png
+
+Con el certificado importado aparece ya la señal de conexión segura:
+![imagen_conexionsegura] Img_Tarea3B.png
+
+
+Se accede al fichero de configuración paloma.iesgn.conf apra realizar la redirección a https añadiendo las siguientes líneas:
+~~~
+        ServerName paloma.iesgn.org
+        <Location/>
+                Redirect permanent / https://paloma.iesgn.org
+        </Location>
+~~~
 
 
 **Tarea 2: Certificados digital con CAcert**
