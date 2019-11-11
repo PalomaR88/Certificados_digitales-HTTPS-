@@ -4,12 +4,25 @@
 **Tarea 1: Instalación del certificado**
 1. Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.
 
+A través de un correo se descarga el certificado de Persona Física. Debe realizarse desde el mismo navegador desde el que se hizo la petición de obtención del certificado. 
+
 
 2. Muestra una captura de pantalla donde se vea las preferencias del navegador donde se ve instalado tu certificado.
+![ImagenNav](Img-Tarea1.png)
+
 
 3. ¿Cómo puedes hacer una copia de tu certificado?, ¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.
 
+Instalación del certificado digital en Firefox:
+- En el menú de opciones: **Preferencias** > **Privacidad y seguridad** > **Seguridad** > **Certificados**. 
+- Selecciona **Ver certificados**.
+- En **Sus Certificados** selecciona **Hacer copia**.
+
+De esta forma se realiza una copia del certificado digital.
+
+
 4. Investiga como exportar la clave pública de tu certificado.
+En **Preferencias** > **Privacidad y seguridad** > **Seguridad** > **Certificados** > **Ver certificados** hacemos doble click sobre el certificado para que aparezca el visor de certificados. En la pestaña **Detalles** da la opción de **Exportar...**.
 
 
 **Tarea 2: Validación del certificado**
@@ -334,7 +347,7 @@ Certificate:
 2. Debe recibir el fichero CSR (Solicitud de Firmar un Certificado) de su compañero, debe firmarlo y enviar el certificado generado a su compañero.
 Tras recibir el certificado se firma de la siguiente forma:
 ~~~
-root@servidor:/home/vagrant# openssl x509 -req -in /vagrant/alejandro.iesgn.org.crt -CA /root/ca/certs/ca.cert.pem -CAkey /root/ca/private/ca.key.pem -CAcreateserial -out alejandro.iesgn.org-firmado.crt
+root@servidor:/home/vagrant# openssl x509 -req -in /vagrant/alejandro.iesgn.org.csr -CA /root/ca/certs/ca.cert.pem -CAkey /root/ca/private/ca.key.pem -CAcreateserial -out alejandro.iesgn.org-firmado.crt
 Signature ok
 subject=C = SP, ST = Seville, L = Dos Hermanas, O = Alejandro, CN = alejandro.iesgn.org
 Getting CA Private Key
@@ -440,6 +453,7 @@ Se crea un nuevo fichero de configuración que lo hemos llamado paloma.iesgn.ssl
 
 Se inicia apache con el nuevo .conf:
 ~~~
+vagrant@servidor:~$ sudo a2enmod ssl
 vagrant@servidor:~$ sudo a2ensite paloma.iesgn.ssl
 Enabling site paloma.iesgn.ssl.
 To activate the new configuration, you need to run:
