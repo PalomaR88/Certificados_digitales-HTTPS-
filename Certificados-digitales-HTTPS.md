@@ -521,22 +521,137 @@ Se accede al fichero de configuración paloma.iesgn.conf apra realizar la redire
 
 
 **Tarea 2: Certificados digital con CAcert**
-
 El lema de CAcert es Free digital certificates for everyone y es que la utilización de certificados emitidos por CA comerciales no es posible para todos los sitios de Internet debido a su coste, lo que los limita su uso a transacciones económicas o sitios con datos relevantes. CAcert es una organización sin ánimo de lucro que mantiene una infraestructura equivalente a una CA comercial aunque con ciertas limitaciones.
 
-Vamos a cambiar el certificado de la página que has desarrollado en el punto anterior para usar el nuevo certificado emitido por CAcert.
+Vamos a a crear un certificado para una página web que se llame www.tunombre.gonzalonazareno.org en el punto anterior para usar el nuevo certificado emitido por CAcert.
 
 Los pasos que hay que dar para utilizar un certificado X.509 emitido por CAcert son los siguientes:
 
-- Darse de alta como usuario en el sitio web.
--         ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/html/paloma
-Dar de alta el dominio para el que queremos obtener el certificado. (opción Domains -> Add)
-    CAcert verifica que podemos hacer uso legítimo del dominio enviando un mensaje de correo electrónico.
-    Dar de alta el certificado de un servidor mediante una solicitud de firma certificado (CSR).
-    Configurar el servidor web con el certificado X.509 emitido por la CA.
-    Al acceder a la página debemos evitar el mensaje de error de “Conexión segura fallida”.
-    ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
+1. Darse de alta como usuario en el sitio web.
+Para darse de alta hay que acceder a la página web de CAcert: [Darse de alta en CAcert](https://www.cacert.org/index.php?id=1). Tras rellenar los datos hay que verificar el correo personal que hemos introducido a través de un correo que nos llegará. 
 
-Escribe una documentación donde expliques el proceso y muestra al profesor su funcionamiento.
+2. Dar de alta el dominio para el que queremos obtener el certificado. (opción Domains -> Add)
+Se accedemos de nuevo al sitio web de CAcert y se inicia sesión con la cuenta que ya se ha verificado. Hay que seleccionar el apartado **Dominios**>**Agregar** y poner el dominio correspondiente.
+![cacert](Img_cacertA.png)
+![cacert1](Img_cacertb.png)
+
+
+3. CAcert verifica que podemos hacer uso legítimo del dominio enviando un mensaje de correo electrónico. (Que recibirá y contestará el profesor!!!)
+Cacert envía un correo al dominio, en este caso gonzalonazareno.org, el cual hay que verificar y tras esto, aparece verificado en **Dominios**>**Ver**.
+![cacert1](Img_cacertc.png)
+
+4. Dar de alta el certificado de un servidor mediante una solicitud de firma certificado (CSR).
+Se crea la clave privada:
+~~~
+vagrant@servidor:~$ sudo openssl genrsa -out paloma.gonzalonazareno.org.key 4096
+~~~
+Se crea un fichero de configuración para el certificado:
+~~~
+[ req ]
+default_bits       = 4096
+default_keyfile    = paloma.gonzalonazareno.org.key
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+
+[ req_distinguished_name ]
+countryName                 = Country Name (2 letter code)
+countryName_default         = sp
+stateOrProvinceName         = State or Province Name (full name)
+stateOrProvinceName_default = Seville
+localityName                = Locality Name (eg, city)
+localityName_default        = Dos Hermanas
+organizationName            = Organization Name (eg, company)
+organizationName_default    = paloma
+commonName                  = Common Name (e.g. server FQDN or YOUR name)
+commonName_max              = 64
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1   = servidor
+~~~
+
+Y se crea el certificado:
+~~~
+vagrant@servidor:~$ sudo openssl req -new -nodes -sha256 -config paloma.gonzalonazareno.org.conf -out paloma.gonzalonazareno.org.csr
+Generating a RSA private key
+...........................................++++
+..................................................++++
+writing new private key to 'paloma.gonzalonazareno.org.key'
+-----
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [sp]:
+State or Province Name (full name) [Seville]:
+Locality Name (eg, city) [Dos Hermanas]:
+Organization Name (eg, company) [paloma]:
+Common Name (e.g. server FQDN or YOUR name) []:paloma.gonzalonazareno.org
+~~~
+
+Y se copia en la página de CAcert el csr:
+![cacertcsr](Img_cacertd.png)
+
+Tras enviar la información del certificado, se crea un fichero .crt con el texto que nos devuelve CAcert:
+![cacertcsr](Img_cacerte.png)
+
+5. Configurar el servidor web con el certificado X.509 emitido por la CA.
+
+Tras mover todos los ficheros a su lugar correspondiente, se configura el fichero ssl.conf de apache de la siguiente forma:
+~~~
+<IfModule mod_ssl.c>
+	<VirtualHost _default_:443>
+		ServerAdmin webmaster@localhost
+
+		DocumentRoot /var/www/html
+
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+		SSLEngine on
+
+		SSLCertificateFile	/etc/ssl/certs/paloma.gonzalonazareno.org.crt
+		SSLCertificateKeyFile /etc/ssl/private/paloma.gonzalonazareno.org.key
+		SSLCertificateChainFile /etc/ssl/certs/paloma.gonzalonazareno.org.csr
+
+		<FilesMatch "\.(cgi|shtml|phtml|php)$">
+				SSLOptions +StdEnvVars
+		</FilesMatch>
+		<Directory /usr/lib/cgi-bin>
+				SSLOptions +StdEnvVars
+		</Directory>
+
+	</VirtualHost>
+</IfModule>
+~~~
+
+Se inicia la nueva configuración de Apache2:
+~~~
+vagrant@servidor:~$ sudo a2enmod ssl
+vagrant@servidor:~$ sudo a2ensite paloma.gonzalonazareno-ssl
+Enabling site paloma.gonzalonazareno-ssl.
+To activate the new configuration, you need to run:
+  systemctl reload apache2
+vagrant@servidor:~$ sudo systemctl restart apache2
+~~~
+
+6. Al acceder a la página debemos evitar el mensaje de error de “Conexión segura fallida”.
+Al acceder a la página, aparece este mensaje.
+![cacertcsr](Img_cacertf.png)
+
+Para evitarlo hay que agregar al navegador el certificado correspondiente que se ecuentra en la página [cacercrt](https://www.cacert.org/index.php?id=3) con el nombre **Certificado Raíz (Formato PEM)**. A continuación, aparece un mensaje preguntando si quiere confiar en la autoridad certificadora.
+
+![cacertcsr](Img_cacertg.png)
+![cacertcsr](Img_cacertf.png)
+![cacertcsr](Img_cacerth.png)
+
+7. ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
+La fecha es el 11 de mayo de 2020. Tendría que renovarlo.
+![cacertcsr](Img_cacerti.png)
+
 
