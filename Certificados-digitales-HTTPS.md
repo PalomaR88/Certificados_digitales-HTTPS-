@@ -18,11 +18,14 @@ Instalación del certificado digital en Firefox:
 - Selecciona **Ver certificados**.
 - En **Sus Certificados** selecciona **Hacer copia**.
 
-De esta forma se realiza una copia del certificado digital.
+De esta forma se realiza una copia del certificado digital. Y se introduce en un dispositivo externo para tener la copia. 
 
 
 4. Investiga como exportar la clave pública de tu certificado.
 En **Preferencias** > **Privacidad y seguridad** > **Seguridad** > **Certificados** > **Ver certificados** hacemos doble click sobre el certificado para que aparezca el visor de certificados. En la pestaña **Detalles** da la opción de **Exportar...**.
+~~~
+sudo openssl pkcs12 -in certificadoFNMT.p12 -clcerts -nokeys -out cert-PalomaR.pub.pem
+~~~
 
 
 **Tarea 2: Validación del certificado**
@@ -648,10 +651,10 @@ Para evitarlo hay que agregar al navegador el certificado correspondiente que se
 
 ![cacertcsr](Img_cacertg.png)
 ![cacertcsr](Img_cacertf.png)
-![cacertcsr](Img_cacerth.png)
+![cacertcsr](Img_cacerth.jpeg)
 
 7. ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
 La fecha es el 11 de mayo de 2020. Tendría que renovarlo.
-![cacertcsr](Img_cacerti.png)
+![cacertcsr](Img_cacerti.jpeg)
 
 
