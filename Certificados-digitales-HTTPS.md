@@ -651,10 +651,10 @@ Para evitarlo hay que agregar al navegador el certificado correspondiente que se
 
 ![cacertcsr](Img_cacertg.png)
 ![cacertcsr](Img_cacertf.png)
-![cacertcsr](Img_cacerth.jpeg)
+![cacertcsr](Img_cacerti.jpeg)
 
 7. ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
 La fecha es el 11 de mayo de 2020. Tendría que renovarlo.
-![cacertcsr](Img_cacerti.jpeg)
+![cacertcsr](Img_cacerth.jpeg)
 
 
