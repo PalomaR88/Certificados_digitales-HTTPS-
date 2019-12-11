@@ -1,1 +1,10 @@
-# Certificados-digitales.-HTTPS-
+# [Certificados digitales (HTTPS)](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#pr%C3%A1ctica-certificados-digitales-https)
+## 1. [Certificado digital de persona física](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#certificado-digital-de-persona-f%C3%ADsica)
+#### 1.1. [Instalación del certificado](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-1-instalaci%C3%B3n-del-certificado)
+#### 1.2. [Validación del certificado](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-2-validaci%C3%B3n-del-certificado)
+#### 1.3. [Firma electrónica](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-3-firma-electr%C3%B3nica)
+#### 1.4. [Autentificación](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-4-autentificaci%C3%B3n)
+--------------------------------------------------------------------------------------
+## 2. [HTTPS / SSL](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#https--ssl)
+#### 2.1. [Certificado autofirmado](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-1-certificado-autofirmado)
+#### 2.2. [Certificados digital con CAcert](https://github.com/PalomaR88/Certificados_digitales-HTTPS-/blob/master/Certificados-digitales-HTTPS.md#tarea-2-certificados-digital-con-cacert)
