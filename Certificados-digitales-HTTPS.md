@@ -8,7 +8,7 @@ A través de un correo se descarga el certificado de Persona Física. Debe reali
 
 
 2. Muestra una captura de pantalla donde se vea las preferencias del navegador donde se ve instalado tu certificado.
-![ImagenNav](images/Img-Tarea1.png)
+![ImagenNav](images/Img_Tarea1.png)
 
 
 3. ¿Cómo puedes hacer una copia de tu certificado?, ¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.
