@@ -1,7 +1,7 @@
 # Práctica: Certificados digitales. HTTPS
 
 ## Certificado digital de persona física
-**Tarea 1: Instalación del certificado**
+#### Tarea 1: Instalación del certificado
 1. Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.
 
 A través de un correo se descarga el certificado de Persona Física. Debe realizarse desde el mismo navegador desde el que se hizo la petición de obtención del certificado. 
@@ -28,7 +28,7 @@ sudo openssl pkcs12 -in certificadoFNMT.p12 -clcerts -nokeys -out cert-PalomaR.p
 ~~~
 
 
-**Tarea 2: Validación del certificado**
+#### Tarea 2: Validación del certificado
 1. Instala en tu ordenador el software autofirma y desde la página de VALIDe valida tu certificado. Muestra capturas de pantalla donde se comprueba la validación.
 
 Descarga el software desde [Firma electrónica gob](https://firmaelectronica.gob.es/Home/Descargas.html) o con el siguiente comando:
@@ -55,7 +55,7 @@ En [VALIDe](https://valide.redsara.es) se valida el certificado seleccionando la
 ![Imagen valide](Img_tarea2A.png)
 
 
-**Tarea 3: Firma electrónica**
+#### Tarea 3: Firma electrónica
 1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
 
 En la página del ejercicio anterior se selecciona la pestaña **Realizar firma** y el botón **Firmar**. De nuevo se selecciona AutoFirma y se elige el fichero que se quiere firmar y el certificado que anteriormente se ha validado. 
@@ -80,7 +80,7 @@ Con la aplicación AutoFirma se selecciona el documento del compañero y se firm
 ![FicheroAutofirma](Img_tarea2H.png)
 
 
-**Tarea 4: Autentificación**
+#### Tarea 4: Autentificación
 1. Utilizando tu certificado accede a alguna página de la administración pública )cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
 ![FicheroAutofirma](Img_tarea2I.png)
 
@@ -96,7 +96,7 @@ sudo cp 000-default.conf paloma.iesgn.org
 ~~~
 
 
-**Tarea 1: Certificado autofirmado**
+#### Tarea 1: Certificado autofirmado
 Esta práctica la vamos a realizar con un compañero. En un primer momento un alumno creará una Autoridad Certficadora y firmará un certificado para la página del otro alumno. Posteriormente se volverá a realizar la práctica con los roles cambiados.
 
 El alumno que hace de Autoridad Certificadora deberá entregar una documentación donde explique los siguientes puntos:
@@ -523,7 +523,7 @@ Se accede al fichero de configuración paloma.iesgn.conf apra realizar la redire
 ~~~
 
 
-**Tarea 2: Certificados digital con CAcert**
+#### Tarea 2: Certificados digital con CAcert
 El lema de CAcert es Free digital certificates for everyone y es que la utilización de certificados emitidos por CA comerciales no es posible para todos los sitios de Internet debido a su coste, lo que los limita su uso a transacciones económicas o sitios con datos relevantes. CAcert es una organización sin ánimo de lucro que mantiene una infraestructura equivalente a una CA comercial aunque con ciertas limitaciones.
 
 Vamos a a crear un certificado para una página web que se llame www.tunombre.gonzalonazareno.org en el punto anterior para usar el nuevo certificado emitido por CAcert.
