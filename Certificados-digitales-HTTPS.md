@@ -8,7 +8,7 @@ A través de un correo se descarga el certificado de Persona Física. Debe reali
 
 
 2. Muestra una captura de pantalla donde se vea las preferencias del navegador donde se ve instalado tu certificado.
-![ImagenNav](Img-Tarea1.png)
+![ImagenNav](images/Img-Tarea1.png)
 
 
 3. ¿Cómo puedes hacer una copia de tu certificado?, ¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.
@@ -51,38 +51,38 @@ paloma@coatlicue:~$ sudo dpkg -i AutoFirma_1_6_5.deb
 
 En [VALIDe](https://valide.redsara.es) se valida el certificado seleccionando la opción AutoFirma:
 
-![Imagen valide](Img_tarea2.png)
-![Imagen valide](Img_tarea2A.png)
+![Imagen valide](images/Img_tarea2.png)
+![Imagen valide](images/Img_tarea2A.png)
 
 
 #### Tarea 3: Firma electrónica
 1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
 
 En la página del ejercicio anterior se selecciona la pestaña **Realizar firma** y el botón **Firmar**. De nuevo se selecciona AutoFirma y se elige el fichero que se quiere firmar y el certificado que anteriormente se ha validado. 
-![FicheroAutofirma](Img_tarea2B.png)
-![FicheroAutofirma](Img_tarea2C.png)
-![FicheroAutofirma](Img_tarea2D.png)
+![FicheroAutofirma](images/Img_tarea2B.png)
+![FicheroAutofirma](images/Img_tarea2C.png)
+![FicheroAutofirma](images/Img_tarea2D.png)
 
 
 2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
 
 Para visualizar la firma del compañero hay que seleccionar Visualizar Firma.
-![FicheroAutofirma](Img_tarea2E.png)
-![FicheroAutofirma](Img_tarea2F.png)
+![FicheroAutofirma](images/Img_tarea2E.png)
+![FicheroAutofirma](images/Img_tarea2F.png)
 
 Para validar la firma del compañero hay que seleccionar Validar Firma.
-![FicheroAutofirma](Img_tarea2G.png)
+![FicheroAutofirma](images/Img_tarea2G.png)
 
 
 3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
 
 Con la aplicación AutoFirma se selecciona el documento del compañero y se firma.
-![FicheroAutofirma](Img_tarea2H.png)
+![FicheroAutofirma](images/Img_tarea2H.png)
 
 
 #### Tarea 4: Autentificación
 1. Utilizando tu certificado accede a alguna página de la administración pública )cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
-![FicheroAutofirma](Img_tarea2I.png)
+![FicheroAutofirma](images/Img_tarea2I.png)
 
 
 ## HTTPS / SSL
@@ -463,7 +463,7 @@ Organization Name (eg, company) [paloma]:
 Common Name (e.g. server FQDN or YOUR name) []:paloma.iesgn.org 
 ~~~
 
-![Imagen1](Img-tarea2-serv.png)
+![Imagen1](images/Img-tarea2-serv.png)
 
 
 3. Envía la solicitud de firma a la entidad certificadora (su compañero).
@@ -507,13 +507,13 @@ vagrant@servidor:~$ sudo systemctl restart apache2
 ~~~
 
 Accedemos a la misma dirección que antes pero con https://
-![Imagen2](Img_Tarea3-serv.png)
+![Imagen2](images/Img_Tarea3-serv.png)
 
 Se importa el certificado de la entidad autentificadora:
-![imagen_crsEA](Img_Tarea3A.png)
+![imagen_crsEA](images/Img_Tarea3A.png)
 
 Con el certificado importado aparece ya la señal de conexión segura:
-![imagen_conexionsegura](Img_Tarea3B.png)
+![imagen_conexionsegura](images/Img_Tarea3B.png)
 
 
 Se accede al fichero de configuración paloma.iesgn.conf apra realizar la redirección a https añadiendo las siguientes líneas:
@@ -535,13 +535,13 @@ Para darse de alta hay que acceder a la página web de CAcert: [Darse de alta en
 
 2. Dar de alta el dominio para el que queremos obtener el certificado. (opción Domains -> Add)
 Se accedemos de nuevo al sitio web de CAcert y se inicia sesión con la cuenta que ya se ha verificado. Hay que seleccionar el apartado **Dominios**>**Agregar** y poner el dominio correspondiente.
-![cacert](Img_cacertA.png)
-![cacert1](Img_cacertb.png)
+![cacert](images/Img_cacertA.png)
+![cacert1](images/Img_cacertb.png)
 
 
 3. CAcert verifica que podemos hacer uso legítimo del dominio enviando un mensaje de correo electrónico. (Que recibirá y contestará el profesor!!!)
 Cacert envía un correo al dominio, en este caso gonzalonazareno.org, el cual hay que verificar y tras esto, aparece verificado en **Dominios**>**Ver**.
-![cacert1](Img_cacertc.png)
+![cacert1](images/Img_cacertc.png)
 
 4. Dar de alta el certificado de un servidor mediante una solicitud de firma certificado (CSR).
 Se crea la clave privada:
@@ -598,10 +598,10 @@ Common Name (e.g. server FQDN or YOUR name) []:paloma.gonzalonazareno.org
 ~~~
 
 Y se copia en la página de CAcert el csr:
-![cacertcsr](Img_cacertd.png)
+![cacertcsr](images/Img_cacertd.png)
 
 Tras enviar la información del certificado, se crea un fichero .crt con el texto que nos devuelve CAcert:
-![cacertcsr](Img_cacerte.png)
+![cacertcsr](images/Img_cacerte.png)
 
 5. Configurar el servidor web con el certificado X.509 emitido por la CA.
 
@@ -645,16 +645,16 @@ vagrant@servidor:~$ sudo systemctl restart apache2
 
 6. Al acceder a la página debemos evitar el mensaje de error de “Conexión segura fallida”.
 Al acceder a la página, aparece este mensaje.
-![cacertcsr](Img_cacertf.png)
+![cacertcsr](images/Img_cacertf.png)
 
 Para evitarlo hay que agregar al navegador el certificado correspondiente que se ecuentra en la página [cacercrt](https://www.cacert.org/index.php?id=3) con el nombre **Certificado Raíz (Formato PEM)**. A continuación, aparece un mensaje preguntando si quiere confiar en la autoridad certificadora.
 
-![cacertcsr](Img_cacertg.png)
-![cacertcsr](Img_cacertf.png)
-![cacertcsr](Img_cacerti.jpeg)
+![cacertcsr](images/Img_cacertg.png)
+![cacertcsr](images/Img_cacertf.png)
+![cacertcsr](images/Img_cacerti.jpeg)
 
 7. ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
 La fecha es el 11 de mayo de 2020. Tendría que renovarlo.
-![cacertcsr](Img_cacerth.jpeg)
+![cacertcsr](images/Img_cacerth.jpeg)
 
 
